@@ -26,13 +26,14 @@
             android:layout_centerHorizontal="true"
             />
 
-        <com.pxwx.stududent.mp3recorder.view.AudioWaveView
+        <com.pxwx.stududent.mp3recorder.view.AudioLumpView
             android:id="@+id/awv_audiowindow_wave"
-            android:layout_width="match_parent"
+            android:layout_width="260dp"
             android:layout_height="@dimen/dp_60"
             android:layout_marginLeft="@dimen/dp_42"
             android:layout_marginRight="@dimen/dp_43"
             android:layout_marginTop="@dimen/dp_14"
+            android:layout_centerHorizontal="true"
             android:layout_below="@+id/tv_audiowindow_time"
             />
 

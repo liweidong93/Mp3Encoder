@@ -3,6 +3,7 @@ package com.pxwx.stududent.mp3recorder.view;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.pxwx.librecorder.RecordManager;
 import com.pxwx.librecorder.recorder.RecordHelper;
 import com.pxwx.librecorder.recorder.listener.RecordFftDataListener;
 import com.pxwx.librecorder.recorder.listener.RecordResultListener;
+import com.pxwx.librecorder.recorder.listener.RecordSoundSizeListener;
 import com.pxwx.librecorder.recorder.listener.RecordStateListener;
 import com.pxwx.stududent.mp3recorder.R;
 
@@ -38,7 +40,7 @@ public class AudioWindow {
     private static AudioWindow instance = null;
     private PopupWindow popupWindow;
     //波形控件
-    private AudioWaveView audioWaveView;
+    private AudioLumpView audioWaveView;
     //计时控件
     private TextView textViewTime;
     //计时
@@ -126,6 +128,7 @@ public class AudioWindow {
         }
     }
 
+    private int soundsize;
     /**
      * 开始录制
      */
@@ -137,6 +140,15 @@ public class AudioWindow {
             @Override
             public void onFftData(byte[] data) {
                 audioWaveView.setWaveData(data);
+            }
+        });
+        RecordManager.getInstance().setRecordSoundSizeListener(new RecordSoundSizeListener() {
+            @Override
+            public void onSoundSize(int soundSize) {
+                if (soundSize > soundsize){
+                    soundsize = soundSize;
+                }
+                Log.e("lwd","soundSize:" + soundSize + ",最大音量：" + soundsize);
             }
         });
         //设置录音状态
